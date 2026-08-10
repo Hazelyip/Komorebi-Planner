@@ -1,0 +1,6 @@
+{
+  "name": "Komorebi Planner",
+  "description": "A calm, minimalist personal journal, calendar, and task planner with local-first IndexedDB storage.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

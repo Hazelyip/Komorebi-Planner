@@ -1,0 +1,10 @@
+{
+  "short_name": "Komorebi",
+  "name": "Komorebi Planner — Personal Journal & Life Management",
+  "icons": [],
+  "start_url": "/",
+  "background_color": "#FAF9F5",
+  "theme_color": "#FAF9F5",
+  "display": "standalone",
+  "orientation": "portrait"
+}
