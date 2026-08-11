@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, Plus, BookOpen, Edit3 } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
+import { zhCN, enUS, ja } from 'date-fns/locale';
 import type { Todo, JournalEntry } from '../../types';
 import { MOOD_OPTIONS } from '../../types';
 import { TodoList } from '../todo/TodoList';
@@ -31,11 +32,19 @@ export const DateDetailDrawer: React.FC<DateDetailDrawerProps> = ({
   onAddTodoForDate,
   onOpenJournalEditor,
 }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   if (!isOpen || !dateStr) return null;
 
   const parsedDate = parseISO(dateStr);
-  const formattedDayName = format(parsedDate, 'EEEE');
+
+  let formattedDateDisplay = '';
+  if (language === 'zh') {
+    formattedDateDisplay = format(parsedDate, 'M月d日 EEEE', { locale: zhCN });
+  } else if (language === 'ja') {
+    formattedDateDisplay = format(parsedDate, 'M月d日 EEEE', { locale: ja });
+  } else {
+    formattedDateDisplay = format(parsedDate, 'MMM d · EEEE', { locale: enUS });
+  }
 
   const completedCount = todos.filter((t) => t.completed).length;
   const totalCount = todos.length;
@@ -52,7 +61,7 @@ export const DateDetailDrawer: React.FC<DateDetailDrawerProps> = ({
         <div className="p-4 md:p-6 bg-white/50 border-b border-[#e0dad2] flex items-center justify-between shrink-0">
           <div>
             <h3 className="font-serif text-lg text-[#5a5a40]">
-              {format(parsedDate, 'MMM d')} · {formattedDayName}
+              {formattedDateDisplay}
             </h3>
           </div>
           <button

@@ -1,14 +1,13 @@
 import React from 'react';
-import { Plus } from 'lucide-react';
 import type { NavTab } from './Sidebar';
 import { useLanguage } from '../../i18n/LanguageContext';
 
 interface HeaderProps {
   currentTab: NavTab;
-  onOpenQuickAdd: () => void;
+  onOpenQuickAdd?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ currentTab, onOpenQuickAdd }) => {
+export const Header: React.FC<HeaderProps> = ({ currentTab }) => {
   const { t, language } = useLanguage();
 
   const titles: Record<NavTab, string> = {
@@ -48,18 +47,6 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onOpenQuickAdd }) =>
         <span className="hidden sm:inline-block text-xs uppercase tracking-widest text-[#a09a90] bg-[#f8f6f2] px-3 py-1.5 rounded-full border border-[#e0dad2]">
           {t.header.today} {todayFormatted}
         </span>
-
-        {/* Quick Add Button on Header for Mobile & Desktop shortcut */}
-        {currentTab !== 'calendar' && (
-          <button
-            type="button"
-            onClick={onOpenQuickAdd}
-            className="flex items-center justify-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-white bg-[#5a5a40] hover:bg-[#4a4a34] rounded-full shadow-xs transition-colors cursor-pointer"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            <span className="hidden xs:inline">{t.header.task}</span>
-          </button>
-        )}
       </div>
     </header>
   );
